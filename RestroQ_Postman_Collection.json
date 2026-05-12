@@ -54,14 +54,14 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/login",
+              "raw": "{{baseUrl}}/auth/login/system",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "login"]
+              "path": ["auth", "login", "system"]
             }
           }
         },
         {
-          "name": "Get My Profile",
+          "name": "Get My Profile (System)",
           "request": {
             "method": "GET",
             "header": [
@@ -71,9 +71,9 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/me",
+              "raw": "{{baseUrl}}/auth/system/me",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "me"]
+              "path": ["auth", "system", "me"]
             }
           }
         },
@@ -106,9 +106,26 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/login",
+              "raw": "{{baseUrl}}/auth/login/user",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "login"]
+              "path": ["auth", "login", "user"]
+            }
+          }
+        },
+        {
+          "name": "Get My Profile (User)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/user/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "user", "me"]
             }
           }
         }
@@ -214,6 +231,79 @@
               "raw": "{{baseUrl}}/restaurants/{{restaurantId}}",
               "host": ["{{baseUrl}}"],
               "path": ["restaurants", "{{restaurantId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Management",
+      "item": [
+        {
+          "name": "Create Staff Member",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "x-tenant-id",
+                "value": "gourmet-garden"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Waiter One\",\n  \"email\": \"waiter1@gourmet.com\",\n  \"password\": \"password123\",\n  \"role\": \"WAITER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/staff",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "staff"]
+            }
+          }
+        },
+        {
+          "name": "List Restaurant Staff",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "x-tenant-id",
+                "value": "gourmet-garden"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "List All Users (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/all",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "all"]
             }
           }
         }

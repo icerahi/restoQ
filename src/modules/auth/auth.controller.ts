@@ -7,27 +7,49 @@ import { AuthService } from "./auth.service";
 export class AuthController {
   constructor(private authService: AuthService = new AuthService()) {}
 
-  login = catchAsync(async (req: Request, res: Response) => {
+  loginSystem = catchAsync(async (req: Request, res: Response) => {
     const { email, password } = req.body;
-    const result = await this.authService.login(email, password);
+    const result = await this.authService.loginSystem(email, password);
 
     sendResponse(res, {
       statusCode: status.OK,
       success: true,
-      message: "User logged in successfully",
+      message: "System Admin logged in successfully",
       data: result,
     });
   });
 
-  me = catchAsync(async (req: Request, res: Response) => {
-    const isSystemUser = !!req.user.globalRole;
-    const result = await this.authService.getMe(req.user.userId, isSystemUser);
+  loginUser = catchAsync(async (req: Request, res: Response) => {
+    const { email, password } = req.body;
+    const result = await this.authService.loginUser(email, password);
 
     sendResponse(res, {
       statusCode: status.OK,
       success: true,
-      message: "Profile retrieved successfully",
-      data: result
+      message: "Restaurant User logged in successfully",
+      data: result,
+    });
+  });
+
+  systemMe = catchAsync(async (req: Request, res: Response) => {
+    const result = await this.authService.getSystemMe(req.user.userId as string);
+
+    sendResponse(res, {
+      statusCode: status.OK,
+      success: true,
+      message: "System Admin profile retrieved successfully",
+      data: result,
+    });
+  });
+
+  userMe = catchAsync(async (req: Request, res: Response) => {
+    const result = await this.authService.getUserMe(req.user.userId as string);
+
+    sendResponse(res, {
+      statusCode: status.OK,
+      success: true,
+      message: "Restaurant User profile retrieved successfully",
+      data: result,
     });
   });
 }
