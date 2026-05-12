@@ -85,14 +85,14 @@ export const auth = (roles: Role[]) => {
       if (tenantId && user.restaurant.id !== tenantId) {
         throw new ApiError(
           status.FORBIDDEN,
-          "Access to this restaurant is denied",
+          "You are not a part of the requested restaurant",
         );
       }
 
       if (roles.length && !roles.includes(user.role)) {
         throw new ApiError(
           status.FORBIDDEN,
-          "Insufficient restaurant permissions",
+          "You are not authorized to access this route",
         );
       }
 
