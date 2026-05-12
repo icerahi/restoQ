@@ -1,0 +1,181 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ==================== SYSTEM LEVEL ====================
+model SystemUser {
+  id        String     @id @default(cuid(2))
+  email     String     @unique
+  password  String
+  name      String
+  role      SystemRole
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+enum SystemRole {
+  SUPER_USER
+  SYSTEM_STAFF
+}
+
+// ==================== RESTAURANT LEVEL ====================
+model Restaurant {
+  id                 String    @id @default(cuid(2))
+  slug               String    @unique // used for subdomain & public URL
+  name               String
+  address            String?
+  phone              String
+  logo               String?
+  subscriptionStatus String    @default("trial") // trial, active, expired, suspended
+  subscriptionEnd    DateTime?
+  isActive           Boolean   @default(true)
+  createdById        String? // Added by SystemUser
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  users      User[]
+  categories Category[]
+  menuItems  MenuItem[]
+  tables     Table[]
+  sessions   TableSession[]
+  orders     Order[]
+  expenses   Expense[]
+}
+
+model User {
+  id           String     @id @default(cuid(2))
+  email        String @unique
+  password     String
+  name         String
+  role         Role
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  createdAt    DateTime   @default(now())
+
+  @@unique([email, restaurantId])
+}
+
+enum Role {
+  OWNER
+  MANAGER
+  KITCHEN
+  WAITER
+}
+
+// Menu
+model Category {
+  id           String     @id @default(cuid(2))
+  name         String // e.g. "Bangladeshi", "Chinese", "Drinks"
+  sortOrder    Int        @default(0)
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  menuItems    MenuItem[]
+}
+
+model MenuItem {
+  id           String      @id @default(cuid(2))
+  name         String // "Beef Biryani"
+  description  String?
+  price        Decimal
+  image        String? // optional
+  isAvailable  Boolean     @default(true)
+  categoryId   String
+  restaurantId String
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [id])
+  category     Category    @relation(fields: [categoryId], references: [id])
+  orderItems   OrderItem[]
+}
+
+// Table & Session Management
+model Table {
+  id             String        @id @default(cuid(2))
+  number         String // "T01", "Table 1"
+  qrCodeUrl      String
+  status         TableStatus   @default(FREE)
+  restaurantId   String
+  restaurant     Restaurant    @relation(fields: [restaurantId], references: [id])
+  currentSession TableSession?
+}
+
+model TableSession {
+  id            String        @id @default(cuid(2))
+  tableId       String        @unique
+  table         Table         @relation(fields: [tableId], references: [id])
+  restaurantId  String
+  customerName  String?
+  customerPhone String?
+  startedAt     DateTime      @default(now())
+  endedAt       DateTime?
+  status        SessionStatus @default(ACTIVE)
+  subtotal      Decimal       @default(0)
+  discount      Decimal       @default(0)
+  finalAmount   Decimal       @default(0)
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+  orders     Order[]
+}
+
+enum TableStatus {
+  FREE
+  OCCUPIED
+  CLEANING
+}
+
+enum SessionStatus {
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+// Ordering
+model Order {
+  id           String      @id @default(cuid(2))
+  orderNumber  String // e.g. ORD-20250509-001
+  sessionId    String
+  restaurantId String
+  status       OrderStatus @default(PENDING)
+  total        Decimal
+  etaMinutes   Int?
+  notes        String?
+  createdById  String? // staff who added via POS
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  session    TableSession @relation(fields: [sessionId], references: [id])
+  restaurant Restaurant   @relation(fields: [restaurantId], references: [id])
+  items      OrderItem[]
+}
+
+model OrderItem {
+  id         String   @id @default(cuid(2))
+  orderId    String
+  menuItemId String
+  quantity   Int
+  unitPrice  Decimal
+  order      Order    @relation(fields: [orderId], references: [id])
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
+}
+
+enum OrderStatus {
+  PENDING
+  APPROVED
+  PREPARING
+  READY
+  SERVED
+  PAID
+  CANCELLED
+}
+
+// Others
+model Expense {
+  id           String     @id @default(cuid(2))
+  amount       Decimal
+  description  String
+  date         DateTime   @default(now())
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+}
