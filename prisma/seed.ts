@@ -11,7 +11,7 @@ async function main() {
   });
 
   if (!existingUser) {
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, env.bcrypt_salt_rounds);
     const superuser = await prisma.systemUser.create({
       data: {
         email: email,

@@ -19,6 +19,11 @@
       "key": "restaurantId",
       "value": "",
       "type": "string"
+    },
+    {
+      "key": "tenantId",
+      "value": "",
+      "type": "string"
     }
   ],
   "item": [
@@ -87,6 +92,9 @@
                   "var jsonData = pm.response.json();",
                   "if (jsonData.data && jsonData.data.token) {",
                   "    pm.collectionVariables.set(\"token\", jsonData.data.token);",
+                  "    if (jsonData.data.user && jsonData.data.user.restaurant && jsonData.data.user.restaurant.id) {",
+                  "        pm.collectionVariables.set(\"tenantId\", jsonData.data.user.restaurant.id);",
+                  "    }",
                   "}"
                 ],
                 "type": "text/javascript"
@@ -98,7 +106,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"owner@demorestro.com\",\n  \"password\": \"password123\"\n}",
+              "raw": "{\n  \"email\": \"owner@gourmet.com\",\n  \"password\": \"password123\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -142,8 +150,9 @@
               "script": {
                 "exec": [
                   "var jsonData = pm.response.json();",
-                  "if (jsonData.data && jsonData.data.restaurant.id) {",
+                  "if (jsonData.data && jsonData.data.restaurant && jsonData.data.restaurant.id) {",
                   "    pm.collectionVariables.set(\"restaurantId\", jsonData.data.restaurant.id);",
+                  "    pm.collectionVariables.set(\"tenantId\", jsonData.data.restaurant.id);",
                   "}"
                 ],
                 "type": "text/javascript"
@@ -233,6 +242,23 @@
               "path": ["restaurants", "{{restaurantId}}"]
             }
           }
+        },
+        {
+          "name": "Delete Restaurant",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/restaurants/{{restaurantId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["restaurants", "{{restaurantId}}"]
+            }
+          }
         }
       ]
     },
@@ -240,6 +266,9 @@
       "name": "User Management",
       "item": [
         {
+          "name": "Tenant Users",
+          "item": [
+            {
           "name": "Create Staff Member",
           "request": {
             "method": "POST",
@@ -247,10 +276,6 @@
               {
                 "key": "Authorization",
                 "value": "Bearer {{token}}"
-              },
-              {
-                "key": "x-tenant-id",
-                "value": "gourmet-garden"
               }
             ],
             "body": {
@@ -263,33 +288,94 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/users/staff",
+              "raw": "{{baseUrl}}/users/me",
               "host": ["{{baseUrl}}"],
-              "path": ["users", "staff"]
+              "path": ["users", "me"]
             }
           }
         },
         {
-          "name": "List Restaurant Staff",
+          "name": "List Own Staff (Me)",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
                 "value": "Bearer {{token}}"
-              },
-              {
-                "key": "x-tenant-id",
-                "value": "gourmet-garden"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/users",
+              "raw": "{{baseUrl}}/users/me",
               "host": ["{{baseUrl}}"],
-              "path": ["users"]
+              "path": ["users", "me"]
             }
           }
         },
+        {
+          "name": "Get Specific Staff Member",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/me/REPLACE_WITH_USER_ID",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "me", "REPLACE_WITH_USER_ID"]
+            }
+          }
+        },
+        {
+          "name": "Update Staff Member",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Waiter One Updated\",\n  \"role\": \"MANAGER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/me/REPLACE_WITH_USER_ID",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "me", "REPLACE_WITH_USER_ID"]
+            }
+          }
+        },
+        {
+          "name": "Delete Staff Member",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/me/REPLACE_WITH_USER_ID",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "me", "REPLACE_WITH_USER_ID"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "System Users",
+      "item": [
         {
           "name": "List All Users (Admin Only)",
           "request": {
@@ -306,8 +392,136 @@
               "path": ["users", "all"]
             }
           }
+        },
+        {
+          "name": "List Tenant Users (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/tenant?tenantId={{restaurantId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "tenant"],
+              "query": [
+                {
+                  "key": "tenantId",
+                  "value": "{{restaurantId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create System Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New Admin\",\n  \"email\": \"newadmin@quicktable.com\",\n  \"password\": \"password123\",\n  \"role\": \"SYSTEM_STAFF\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/system",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "system"]
+            }
+          }
+        },
+        {
+          "name": "List System Admins",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/system",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "system"]
+            }
+          }
+        },
+        {
+          "name": "Get Specific System Admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/system/REPLACE_WITH_SYSTEM_USER_ID",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "system", "REPLACE_WITH_SYSTEM_USER_ID"]
+            }
+          }
+        },
+        {
+          "name": "Update System Admin",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New Admin Updated\",\n  \"role\": \"SUPER_USER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/system/REPLACE_WITH_SYSTEM_USER_ID",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "system", "REPLACE_WITH_SYSTEM_USER_ID"]
+            }
+          }
+        },
+        {
+          "name": "Delete System Admin",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/system/REPLACE_WITH_SYSTEM_USER_ID",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "system", "REPLACE_WITH_SYSTEM_USER_ID"]
+            }
+          }
         }
       ]
     }
+  ]
+}
   ]
 }

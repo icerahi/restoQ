@@ -1,6 +1,6 @@
-import { Role, SystemRole } from "@prisma/client";
+import { SystemRole } from "@prisma/client";
 import { Router } from "express";
-import { auth, authSystem } from "../../middlewares/auth";
+import { authTenant, authSystem } from "../../middlewares/auth";
 import { validateRequest } from "../../middlewares/validateRequest";
 import { AuthController } from "./auth.controller";
 import { loginSchema } from "./auth.validation";
@@ -25,6 +25,6 @@ router.get(
   authController.systemMe,
 );
 
-router.get("/user/me", auth([]), authController.userMe);
+router.get("/user/me", authTenant([]), authController.userMe);
 
 export const authRoutes = router;

@@ -32,12 +32,14 @@ export class AuthController {
   });
 
   systemMe = catchAsync(async (req: Request, res: Response) => {
-    const result = await this.authService.getSystemMe(req.user.userId as string);
+    const result = await this.authService.getSystemMe(
+      req.user.userId as string,
+    );
 
     sendResponse(res, {
       statusCode: status.OK,
       success: true,
-      message: "System Admin profile retrieved successfully",
+      message: "System User profile retrieved successfully",
       data: result,
     });
   });

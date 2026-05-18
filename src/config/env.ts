@@ -15,4 +15,5 @@ export const env = {
     email: process.env.SUPERUSER_EMAIL as string,
     password: process.env.SUPERUSER_PASSWORD as string,
   },
+  bcrypt_salt_rounds: Number(process.env.BCRYPT_SALT_ROUNDS),
 };

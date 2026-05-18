@@ -18,7 +18,6 @@ export class AuthService {
     const payload = {
       userId: user.id,
       role: user.role,
-      // isSystemUser: true,
     };
 
     const token = jwt.sign(payload, env.jwt.secret, {
@@ -52,7 +51,6 @@ export class AuthService {
       userId: user.id,
       restaurantId: user.restaurantId,
       role: user.role,
-      // isSystemUser: false,
     };
 
     const token = jwt.sign(payload, env.jwt.secret, {
@@ -69,14 +67,13 @@ export class AuthService {
         restaurant: {
           id: user.restaurant.id,
           name: user.restaurant.name,
-          slug: user.restaurant.slug,
         },
       },
     };
   }
 
   async getSystemMe(userId: string) {
-    const user = await prisma.systemUser.findUnique({
+    const user = await prisma.systemUser.findUniqueOrThrow({
       where: { id: userId },
       select: {
         id: true,
@@ -86,12 +83,11 @@ export class AuthService {
         createdAt: true,
       },
     });
-    if (!user) throw new ApiError(status.NOT_FOUND, "System user not found");
     return user;
   }
 
   async getUserMe(userId: string) {
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findUniqueOrThrow({
       where: { id: userId },
       select: {
         id: true,
@@ -103,14 +99,12 @@ export class AuthService {
           select: {
             id: true,
             name: true,
-            slug: true,
             subscriptionStatus: true,
           },
         },
       },
     });
-    if (!user)
-      throw new ApiError(status.NOT_FOUND, "Restaurant user not found");
+
     return user;
   }
 }

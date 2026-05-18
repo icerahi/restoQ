@@ -8,13 +8,14 @@ generator client {
 
 // ==================== SYSTEM LEVEL ====================
 model SystemUser {
-  id        String     @id @default(cuid(2))
-  email     String     @unique
-  password  String
-  name      String
-  role      SystemRole
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id          String       @id @default(cuid(2))
+  email       String       @unique
+  password    String
+  name        String
+  role        SystemRole
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  restaurants Restaurant[]
 }
 
 enum SystemRole {
@@ -22,20 +23,30 @@ enum SystemRole {
   SYSTEM_STAFF
 }
 
+enum SubscriptionStatus {
+  TRIAL
+  ACTIVE
+  EXPIRED
+  SUSPENDED
+}
+
+
 // ==================== RESTAURANT LEVEL ====================
 model Restaurant {
-  id                 String    @id @default(cuid(2))
-  slug               String    @unique // used for subdomain & public URL
+  id                 String      @id @default(cuid(2))
+  // slug               String    @unique // used for subdomain & public URL
   name               String
   address            String?
-  phone              String
+  phone              String?
   logo               String?
-  subscriptionStatus String    @default("trial") // trial, active, expired, suspended
+  subscriptionStatus SubscriptionStatus @default(TRIAL)
   subscriptionEnd    DateTime?
-  isActive           Boolean   @default(true)
-  createdById        String? // Added by SystemUser
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  isActive           Boolean     @default(true)
+  createdById        String?
+  createdBy          SystemUser? @relation(fields: [createdById], references: [id])
+  
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
 
   users      User[]
   categories Category[]
@@ -48,7 +59,7 @@ model Restaurant {
 
 model User {
   id           String     @id @default(cuid(2))
-  email        String @unique
+  email        String     @unique
   password     String
   name         String
   role         Role
@@ -62,8 +73,8 @@ model User {
 enum Role {
   OWNER
   MANAGER
-  KITCHEN
-  WAITER
+  CHEF
+  STAFF
 }
 
 // Menu
