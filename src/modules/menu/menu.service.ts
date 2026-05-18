@@ -1,10 +1,10 @@
 import { MenuItem, Prisma } from "@prisma/client";
 import status from "http-status";
-import ApiError from "../../errors/ApiError";
 import prisma from "../../config/db";
+import ApiError from "../../errors/ApiError";
 import { IOptions, calculatePagination } from "../../utils/pagination";
-import { IMenuFilterRequest } from "./menu.interface";
 import { menuSearchableFields } from "./menu.constant";
+import { IMenuFilterRequest } from "./menu.interface";
 
 export class MenuService {
   async createMenuItem(payload: Partial<MenuItem>): Promise<MenuItem> {
@@ -27,7 +27,7 @@ export class MenuService {
     const result = await prisma.menuItem.create({
       data: payload as MenuItem,
       include: {
-        category: true,
+        category: { select: { id: true, name: true } },
       },
     });
     return result;
@@ -38,7 +38,7 @@ export class MenuService {
     options: IOptions,
     restaurantId: string,
   ) {
-    const { limit, page, skip, sortBy, sortOrder } = calculatePagination(options);
+    const { limit, page, skip } = calculatePagination(options);
     const { searchTerm, isAvailable, ...filterData } = filters;
 
     const andConditions: Prisma.MenuItemWhereInput[] = [];
@@ -79,11 +79,14 @@ export class MenuService {
       where: whereConditions,
       skip,
       take: limit,
-      orderBy: {
-        [sortBy]: sortOrder,
-      },
+
       include: {
-        category: true,
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
       },
     });
 
@@ -99,6 +102,34 @@ export class MenuService {
       },
       data: result,
     };
+  }
+
+  async getMenuItemById(
+    id: string,
+    restaurantId: string,
+  ): Promise<MenuItem | null> {
+    const result = await prisma.menuItem.findUnique({
+      where: {
+        id_restaurantId: {
+          id,
+          restaurantId,
+        },
+      },
+      include: {
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+    });
+
+    if (!result) {
+      throw new ApiError(status.NOT_FOUND, "Menu item not found");
+    }
+
+    return result;
   }
 
   async updateMenuItem(
@@ -141,7 +172,7 @@ export class MenuService {
       where: { id },
       data: payload,
       include: {
-        category: true,
+        category: { select: { id: true, name: true } },
       },
     });
 

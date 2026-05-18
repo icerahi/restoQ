@@ -71,7 +71,7 @@ export class RestaurantController {
   });
 
   deleteRestaurant = catchAsync(async (req: Request, res: Response) => {
-    const result = await this.restaurantService.deleteRestaurant(
+    await this.restaurantService.deleteRestaurant(
       req.params["id"] as string,
     );
 
@@ -79,7 +79,7 @@ export class RestaurantController {
       statusCode: status.OK,
       success: true,
       message: "Restaurant deleted successfully",
-      data: result,
+      data: null,
     });
   });
 

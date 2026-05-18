@@ -17,9 +17,11 @@ router.post(
 
 router.get("/", authTenant([]), menuController.getAllMenuItems);
 
+router.get("/:id", authTenant([]), menuController.getMenuItemById);
+
 router.patch(
   "/:id",
-  authTenant([Role.OWNER, Role.MANAGER, Role.CHEF]),
+  authTenant([Role.OWNER, Role.MANAGER]),
   validateRequest(updateMenuSchema),
   menuController.updateMenuItem,
 );

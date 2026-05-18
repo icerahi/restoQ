@@ -80,13 +80,13 @@ export class CategoryController {
     const restaurantId = req.tenantId as string;
     const id = req.params.id as string;
 
-    const result = await this.categoryService.deleteCategory(id, restaurantId);
+    await this.categoryService.deleteCategory(id, restaurantId);
 
     sendResponse(res, {
       statusCode: status.OK,
       success: true,
       message: "Category deleted successfully",
-      data: result,
+      data: null,
     });
   });
 }

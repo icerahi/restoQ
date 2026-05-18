@@ -48,6 +48,20 @@ export class MenuController {
     });
   });
 
+  getMenuItemById = catchAsync(async (req: Request, res: Response) => {
+    const restaurantId = req.tenantId as string;
+    const id = req.params.id as string;
+
+    const result = await this.menuService.getMenuItemById(id, restaurantId);
+
+    sendResponse(res, {
+      statusCode: status.OK,
+      success: true,
+      message: "Menu item retrieved successfully",
+      data: result,
+    });
+  });
+
   updateMenuItem = catchAsync(async (req: Request, res: Response) => {
     const restaurantId = req.tenantId as string;
     const id = req.params.id as string;
@@ -66,13 +80,13 @@ export class MenuController {
     const restaurantId = req.tenantId as string;
     const id = req.params.id as string;
 
-    const result = await this.menuService.deleteMenuItem(id, restaurantId);
+    await this.menuService.deleteMenuItem(id, restaurantId);
 
     sendResponse(res, {
       statusCode: status.OK,
       success: true,
       message: "Menu item deleted successfully",
-      data: result,
+      data: null,
     });
   });
 }

@@ -20,8 +20,6 @@ _The foundation. The Super User creates the first tenant._(done)
 - [x] **GET `/api/v1/restaurant/me`**: Access by all stuff member
 - [x] **PATCH `/api/v1/restaurant/me`**: Update the restaurant info. `OWNER` and `MANAGER` role required.
 
-
-
 _User Management(System)_
 
 - [x] **POST `/api/v1/users/system`**: Create a new System User. Requires `SUPER_USER` token.
@@ -49,19 +47,19 @@ _You need a menu before you can take orders._
 
 _Category Management_
 
-- [ ] **POST `/api/v1/category`**: Create menu categories (e.g., "Starters", "Mains", "Drinks").    
-- [ ] **GET `/api/v1/category`**: Fetch all categories (needed for dropdowns when creating items).
-- [ ] **GET `/api/v1/category/:id`**: Fetch a specific category.
-- [ ] **PATCH `/api/v1/category/:id`**: Update a category's name.
-- [ ] **DELETE `/api/v1/category/:id`**: Delete a category.
+- [x] **POST `/api/v1/category`**: Create menu categories (e.g., "Starters", "Mains", "Drinks").
+- [x] **GET `/api/v1/category`**: Fetch all categories (needed for dropdowns when creating items).
+- [x] **GET `/api/v1/category/:id`**: Fetch a specific category.
+- [x] **PATCH `/api/v1/category/:id`**: Update a category's name.
+- [x] **DELETE `/api/v1/category/:id`**: Delete a category.
 
 _Item Management_
 
 - [ ] **POST `/api/v1/menu`**: Create a `MenuItem` (requires a valid `categoryId`).
 - [ ] **GET `/api/v1/menu`**: List all menu items. Should support filtering by category.
+- [ ] **GET `/api/v1/menu/:id`**: Get an single Item
 - [ ] **PATCH `/api/v1/menu/:id`**: Update price, availability, or image of an item.
 - [ ] **DELETE `/api/v1/menu/:id`**: Delete an item.
-
 
 ## Phase 4: Table Setup
 

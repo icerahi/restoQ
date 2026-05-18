@@ -804,6 +804,28 @@
               }
             },
             {
+              "name": "Get Specific Menu Item",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/menu/REPLACE_WITH_MENU_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "menu",
+                    "REPLACE_WITH_MENU_ID"
+                  ]
+                }
+              }
+            },
+            {
               "name": "Get All Menu Items",
               "request": {
                 "method": "GET",

@@ -76,13 +76,13 @@ export class UserController {
   deleteSystemUser = catchAsync(async (req: Request, res: Response) => {
     const { id } = req.params;
 
-    const result = await this.userService.deleteSystemUser(id as string);
+    await this.userService.deleteSystemUser(id as string);
 
     sendResponse(res, {
       statusCode: status.OK,
       success: true,
       message: "System user deleted successfully",
-      data: result,
+      data: null,
     });
   });
 
@@ -185,7 +185,7 @@ export class UserController {
     const { id } = req.params;
     const restaurantId = req.tenantId;
 
-    const result = await this.userService.deleteUser(
+    await this.userService.deleteUser(
       id as string,
       req.user,
       restaurantId,
@@ -195,7 +195,7 @@ export class UserController {
       statusCode: status.OK,
       success: true,
       message: "User deleted successfully",
-      data: result,
+      data: null,
     });
   });
 }
