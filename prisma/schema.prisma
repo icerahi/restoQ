@@ -85,6 +85,9 @@ model Category {
   restaurantId String
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   menuItems    MenuItem[]
+
+  @@unique([id, restaurantId])
+  @@unique([name, restaurantId])
 }
 
 model MenuItem {
@@ -99,6 +102,8 @@ model MenuItem {
   restaurant   Restaurant  @relation(fields: [restaurantId], references: [id])
   category     Category    @relation(fields: [categoryId], references: [id])
   orderItems   OrderItem[]
+
+  @@unique([id, restaurantId])
 }
 
 // Table & Session Management

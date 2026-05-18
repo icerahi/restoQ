@@ -60,8 +60,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/auth/login/system",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "login", "system"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login",
+                "system"
+              ]
             }
           }
         },
@@ -77,8 +83,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/auth/system/me",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "system", "me"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "system",
+                "me"
+              ]
             }
           }
         },
@@ -115,8 +127,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/auth/login/user",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "login", "user"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login",
+                "user"
+              ]
             }
           }
         },
@@ -132,8 +150,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/auth/user/me",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "user", "me"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "user",
+                "me"
+              ]
             }
           }
         }
@@ -178,8 +202,12 @@
             },
             "url": {
               "raw": "{{baseUrl}}/restaurants",
-              "host": ["{{baseUrl}}"],
-              "path": ["restaurants"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "restaurants"
+              ]
             }
           }
         },
@@ -195,8 +223,12 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/restaurants",
-              "host": ["{{baseUrl}}"],
-              "path": ["restaurants"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "restaurants"
+              ]
             }
           }
         },
@@ -212,8 +244,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/restaurants/{{restaurantId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["restaurants", "{{restaurantId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "restaurants",
+                "{{restaurantId}}"
+              ]
             }
           }
         },
@@ -238,8 +275,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/restaurants/{{restaurantId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["restaurants", "{{restaurantId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "restaurants",
+                "{{restaurantId}}"
+              ]
             }
           }
         },
@@ -255,8 +297,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/restaurants/{{restaurantId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["restaurants", "{{restaurantId}}"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "restaurants",
+                "{{restaurantId}}"
+              ]
             }
           }
         }
@@ -269,259 +316,570 @@
           "name": "Tenant Users",
           "item": [
             {
-          "name": "Create Staff Member",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Waiter One\",\n  \"email\": \"waiter1@gourmet.com\",\n  \"password\": \"password123\",\n  \"role\": \"WAITER\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+              "name": "Create Staff Member",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Waiter One\",\n  \"email\": \"waiter1@gourmet.com\",\n  \"password\": \"password123\",\n  \"role\": \"WAITER\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me"
+                  ]
                 }
               }
             },
-            "url": {
-              "raw": "{{baseUrl}}/users/me",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "me"]
-            }
-          }
-        },
-        {
-          "name": "List Own Staff (Me)",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/users/me",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "me"]
-            }
-          }
-        },
-        {
-          "name": "Get Specific Staff Member",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/users/me/REPLACE_WITH_USER_ID",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "me", "REPLACE_WITH_USER_ID"]
-            }
-          }
-        },
-        {
-          "name": "Update Staff Member",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Waiter One Updated\",\n  \"role\": \"MANAGER\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+            {
+              "name": "List Own Staff (Me)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me"
+                  ]
                 }
               }
             },
-            "url": {
-              "raw": "{{baseUrl}}/users/me/REPLACE_WITH_USER_ID",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "me", "REPLACE_WITH_USER_ID"]
+            {
+              "name": "Get Specific Staff Member",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/me/REPLACE_WITH_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me",
+                    "REPLACE_WITH_USER_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Staff Member",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Waiter One Updated\",\n  \"role\": \"MANAGER\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/me/REPLACE_WITH_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me",
+                    "REPLACE_WITH_USER_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Staff Member",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/me/REPLACE_WITH_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me",
+                    "REPLACE_WITH_USER_ID"
+                  ]
+                }
+              }
             }
-          }
+          ]
         },
         {
-          "name": "Delete Staff Member",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
+          "name": "System Users",
+          "item": [
+            {
+              "name": "List All Users (Admin Only)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/all",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "all"
+                  ]
+                }
               }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/users/me/REPLACE_WITH_USER_ID",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "me", "REPLACE_WITH_USER_ID"]
+            },
+            {
+              "name": "List Tenant Users (Admin Only)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/tenant?tenantId={{restaurantId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "tenant"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenantId",
+                      "value": "{{restaurantId}}"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create System Admin",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"New Admin\",\n  \"email\": \"newadmin@quicktable.com\",\n  \"password\": \"password123\",\n  \"role\": \"SYSTEM_STAFF\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/system",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "system"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "List System Admins",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/system",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "system"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Specific System Admin",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/system/REPLACE_WITH_SYSTEM_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "system",
+                    "REPLACE_WITH_SYSTEM_USER_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update System Admin",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"New Admin Updated\",\n  \"role\": \"SUPER_USER\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/system/REPLACE_WITH_SYSTEM_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "system",
+                    "REPLACE_WITH_SYSTEM_USER_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete System Admin",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/system/REPLACE_WITH_SYSTEM_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "system",
+                    "REPLACE_WITH_SYSTEM_USER_ID"
+                  ]
+                }
+              }
             }
-          }
+          ]
         }
       ]
     },
     {
-      "name": "System Users",
+      "name": "Menu Management",
       "item": [
         {
-          "name": "List All Users (Admin Only)",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/users/all",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "all"]
-            }
-          }
-        },
-        {
-          "name": "List Tenant Users (Admin Only)",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/users/tenant?tenantId={{restaurantId}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "tenant"],
-              "query": [
-                {
-                  "key": "tenantId",
-                  "value": "{{restaurantId}}"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Create System Admin",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"New Admin\",\n  \"email\": \"newadmin@quicktable.com\",\n  \"password\": \"password123\",\n  \"role\": \"SYSTEM_STAFF\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+          "name": "Category Management",
+          "item": [
+            {
+              "name": "Create Category",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Main Courses\",\n  \"sortOrder\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/category",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "category"
+                  ]
                 }
               }
             },
-            "url": {
-              "raw": "{{baseUrl}}/users/system",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "system"]
-            }
-          }
-        },
-        {
-          "name": "List System Admins",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/users/system",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "system"]
-            }
-          }
-        },
-        {
-          "name": "Get Specific System Admin",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/users/system/REPLACE_WITH_SYSTEM_USER_ID",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "system", "REPLACE_WITH_SYSTEM_USER_ID"]
-            }
-          }
-        },
-        {
-          "name": "Update System Admin",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"New Admin Updated\",\n  \"role\": \"SUPER_USER\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+            {
+              "name": "Get All Categories",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/category",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "category"
+                  ]
                 }
               }
             },
-            "url": {
-              "raw": "{{baseUrl}}/users/system/REPLACE_WITH_SYSTEM_USER_ID",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "system", "REPLACE_WITH_SYSTEM_USER_ID"]
+            {
+              "name": "Get Specific Category",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/category/REPLACE_WITH_CATEGORY_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "category",
+                    "REPLACE_WITH_CATEGORY_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Category",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Main Courses\",\n  \"sortOrder\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/category/REPLACE_WITH_CATEGORY_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "category",
+                    "REPLACE_WITH_CATEGORY_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Category",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/category/REPLACE_WITH_CATEGORY_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "category",
+                    "REPLACE_WITH_CATEGORY_ID"
+                  ]
+                }
+              }
             }
-          }
+          ]
         },
         {
-          "name": "Delete System Admin",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
+          "name": "Item Management",
+          "item": [
+            {
+              "name": "Create Menu Item",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Beef Burger\",\n  \"description\": \"Delicious beef burger\",\n  \"price\": 12.99,\n  \"categoryId\": \"REPLACE_WITH_CATEGORY_ID\",\n  \"isAvailable\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/menu",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "menu"
+                  ]
+                }
               }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/users/system/REPLACE_WITH_SYSTEM_USER_ID",
-              "host": ["{{baseUrl}}"],
-              "path": ["users", "system", "REPLACE_WITH_SYSTEM_USER_ID"]
+            },
+            {
+              "name": "Get All Menu Items",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/menu",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "menu"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update Menu Item",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price\": 14.99,\n  \"isAvailable\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/menu/REPLACE_WITH_MENU_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "menu",
+                    "REPLACE_WITH_MENU_ID"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Menu Item",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/menu/REPLACE_WITH_MENU_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "menu",
+                    "REPLACE_WITH_MENU_ID"
+                  ]
+                }
+              }
             }
-          }
+          ]
         }
       ]
     }
-  ]
-}
   ]
 }

@@ -1,0 +1,36 @@
+
+> restroq@1.0.0 build
+> tsc
+
+src/modules/category/category.controller.ts(48,56): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/category/category.controller.ts(62,55): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/category/category.controller.ts(76,55): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/category/category.service.ts(4,20): error TS2307: Cannot find module '../../shared/prisma' or its corresponding type declarations.
+src/modules/category/category.service.ts(5,36): error TS2307: Cannot find module '../../interfaces/pagination' or its corresponding type declarations.
+src/modules/category/category.service.ts(6,35): error TS2307: Cannot find module '../../helpers/paginationHelper' or its corresponding type declarations.
+src/modules/category/category.validation.ts(6,7): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(params?: string | { error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; } | undefined): ZodString', gave the following error.
+    Object literal may only specify known properties, and 'required_error' does not exist in type '{ error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; }'.
+  Overload 2 of 2, '(params?: string | { error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; } | undefined): $ZodType<...>', gave the following error.
+    Object literal may only specify known properties, and 'required_error' does not exist in type '{ error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; }'.
+src/modules/menu/menu.controller.ts(48,51): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/menu/menu.controller.ts(62,51): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/modules/menu/menu.service.ts(4,20): error TS2307: Cannot find module '../../shared/prisma' or its corresponding type declarations.
+src/modules/menu/menu.service.ts(5,36): error TS2307: Cannot find module '../../interfaces/pagination' or its corresponding type declarations.
+src/modules/menu/menu.service.ts(6,35): error TS2307: Cannot find module '../../helpers/paginationHelper' or its corresponding type declarations.
+src/modules/menu/menu.validation.ts(6,7): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(params?: string | { error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; } | undefined): ZodString', gave the following error.
+    Object literal may only specify known properties, and 'required_error' does not exist in type '{ error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; }'.
+  Overload 2 of 2, '(params?: string | { error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; } | undefined): $ZodType<...>', gave the following error.
+    Object literal may only specify known properties, and 'required_error' does not exist in type '{ error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; }'.
+src/modules/menu/menu.validation.ts(10,7): error TS2353: Object literal may only specify known properties, and 'required_error' does not exist in type '{ error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; }'.
+src/modules/menu/menu.validation.ts(15,7): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(params?: string | { error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; } | undefined): ZodString', gave the following error.
+    Object literal may only specify known properties, and 'required_error' does not exist in type '{ error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; }'.
+  Overload 2 of 2, '(params?: string | { error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; } | undefined): $ZodType<...>', gave the following error.
+    Object literal may only specify known properties, and 'required_error' does not exist in type '{ error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; }'.
