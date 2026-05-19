@@ -110,11 +110,14 @@ model MenuItem {
 model Table {
   id             String        @id @default(cuid(2))
   number         String // "T01", "Table 1"
-  qrCodeUrl      String
   status         TableStatus   @default(FREE)
+  layoutSettings Json?
   restaurantId   String
   restaurant     Restaurant    @relation(fields: [restaurantId], references: [id])
   currentSession TableSession?
+
+  @@unique([id, restaurantId])
+  @@unique([number, restaurantId])
 }
 
 model TableSession {
@@ -138,7 +141,6 @@ model TableSession {
 enum TableStatus {
   FREE
   OCCUPIED
-  CLEANING
 }
 
 enum SessionStatus {

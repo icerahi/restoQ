@@ -902,6 +902,160 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Table Setup & Setup Management",
+      "item": [
+        {
+          "name": "Create Table",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"number\": \"Table 1\",\n  \"status\": \"FREE\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/table",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "table"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Tables",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/table",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "table"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Specific Table Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/table/REPLACE_WITH_TABLE_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "table",
+                "REPLACE_WITH_TABLE_ID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Table Details",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"number\": \"Table 1 (Updated)\",\n  \"status\": \"OCCUPIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/table/REPLACE_WITH_TABLE_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "table",
+                "REPLACE_WITH_TABLE_ID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Table",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/table/REPLACE_WITH_TABLE_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "table",
+                "REPLACE_WITH_TABLE_ID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Table QR Code URL",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/table/REPLACE_WITH_TABLE_ID/qr",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "table",
+                "REPLACE_WITH_TABLE_ID",
+                "qr"
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }

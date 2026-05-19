@@ -55,18 +55,22 @@ _Category Management_
 
 _Item Management_
 
-- [ ] **POST `/api/v1/menu`**: Create a `MenuItem` (requires a valid `categoryId`).
-- [ ] **GET `/api/v1/menu`**: List all menu items. Should support filtering by category.
-- [ ] **GET `/api/v1/menu/:id`**: Get an single Item
-- [ ] **PATCH `/api/v1/menu/:id`**: Update price, availability, or image of an item.
-- [ ] **DELETE `/api/v1/menu/:id`**: Delete an item.
+- [x] **POST `/api/v1/menu`**: Create a `MenuItem` (requires a valid `categoryId`).
+- [x] **GET `/api/v1/menu`**: List all menu items. Should support filtering by category.
+- [x] **GET `/api/v1/menu/:id`**: Get an single Item
+- [x] **PATCH `/api/v1/menu/:id`**: Update price, availability, or image of an item.
+- [x] **DELETE `/api/v1/menu/:id`**: Delete an item.
 
 ## Phase 4: Table Setup
 
 _You need physical tables mapped out for QR codes._
 
-- [ ] **POST `/api/v1/table`**: Create a Table (e.g., Table "T-01").
-- [ ] **GET `/api/v1/table`**: List all tables and their current statuses.
+- [x] **POST `/api/v1/table`**: Create a Table (e.g., Table "T-01").
+- [x] **GET `/api/v1/table`**: List all tables and their current statuses.
+- [x] **GET `/api/v1/table/:id`**: Get a single table.
+- [x] **PATCH `/api/v1/table/:id`**: Update a table's status.
+- [x] **DELETE `/api/v1/table/:id`**: Delete a table.
+
 - [ ] **GET `/api/v1/table/:id/qr`**: Generate/Retrieve the unique QR code URL for the table.
 
 ## Phase 5: The Core Workflow (Sessions & Orders)

@@ -5,6 +5,7 @@ import { userRoutes } from '../modules/user/user.route';
 
 import { categoryRoutes } from '../modules/category/category.route';
 import { menuRoutes } from '../modules/menu/menu.route';
+import { tableRoutes } from '../modules/table/table.route';
 
 const router = Router();
 
@@ -14,6 +15,7 @@ const moduleRoutes = [
   { path: '/users', route: userRoutes },
   { path: '/category', route: categoryRoutes },
   { path: '/menu', route: menuRoutes },
+  { path: '/table', route: tableRoutes },
 ];
 
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
