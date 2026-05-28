@@ -1,5 +1,4 @@
 # restoQ
-[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/icerahi/restoQ)
 
 restoQ is a comprehensive, multi-tenant restaurant management API designed to streamline operations from system administration to customer ordering. It provides a robust backend solution for managing restaurants, staff, menus, and tables, with a focus on QR-based ordering systems.
 
